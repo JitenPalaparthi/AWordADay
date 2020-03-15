@@ -1,0 +1,34 @@
+version: "3"
+services:
+ # app:
+   # container_name: eduEmpower_service
+   # restart: always
+   # build: ./
+   # ports:
+   #   - "50051:50051"
+   # links:
+   #   - mongo
+   # networks: 
+   #   - backend
+  mongo:
+    container_name: mongo_eduempower
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "./data/db:/data/db"
+    networks: 
+      - backend
+  nats:
+    container_name: nats_eduempower
+    image: nats
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: "bridge"
