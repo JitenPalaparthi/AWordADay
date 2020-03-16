@@ -24,34 +24,80 @@ class _MyHomePageState extends State<MyHomePage> {
   final mainKey = GlobalKey<ScaffoldState>();
 
   void getInit() async {
-    dynamic storedWord;
+    Word storedWord;
     final prefs = await SharedPreferences.getInstance();
     final day = prefs.getInt('fetchOn') ?? 0;
     if (day == DateTime.now().day) {
-      storedWord = json.decode(prefs.getString('storedWord')) ?? null;
+      storedWord =
+          await fetchFromLocal(); 
+     
+    await setWordState(storedWord);
+     
+    }
+    if (storedWord == null || day != DateTime.now().day) {
+      Word item =  await fetchFromServer();
+
+      if (item != null) {
+  
+        storeInLocal(item);
+        setWordState(item);
+       
+      } else {
+        storedWord =
+            await fetchFromLocal(); 
+        setWordState(storedWord);
+      
+      }
+    }
+  }
+
+   setWordState(Word item) async {
+    if (item != null) {
       setState(() {
-        _word = Word.fromJson(storedWord);
+        _word = item;
         isLoaded = true;
       });
     }
-    if (storedWord == null || day != DateTime.now().day) {
-      const url = "http://localhost:50051/v1/word/getMagicWord";
-      var item = await api_word.Word().getMagicWord(url);
-      if (item != null) {
-        prefs.setString('storedWord', json.encode(item));
-        var day = new DateTime.now().day;
-        prefs.setInt('fetchOn', day);
-        setState(() {
-          _word = item;
-          isLoaded = true;
-        });
-      } else {
-        storedWord = json.decode(prefs.getString('storedWord')) ?? null;
-        setState(() {
-          _word = Word.fromJson(storedWord);
-          isLoaded = true;
-        });
+  }
+
+  void getInitPlatform() async {
+    const url = "http://localhost:50051/v1/word/getMagicWord";
+    var item = await api_word.Word().getMagicWord(url);
+    print(item.meaning);
+    if (item != null) {
+      setState(() {
+        _word = item;
+        isLoaded = true;
+      });
+    }
+  }
+
+  Future<Word> fetchFromServer() async {
+    const url = "http://localhost:50051/v1/word/getMagicWord";
+    return await api_word.Word().getMagicWord(url).catchError((e) {
+      return null;
+    });
+  }
+
+  Future<Word> fetchFromLocal() async {
+    final prefs = await SharedPreferences.getInstance();
+    var storedWordStr = prefs.getString('storedWord') ?? null;
+    if (storedWordStr != null) {
+      var storedWordStr2 = json.decode(storedWordStr) ?? null;
+
+      if (storedWordStr2 != null) {
+        return Word.fromJson(storedWordStr2) ?? null;
       }
+    }
+    return null;
+  }
+
+  void storeInLocal(Word item) async {
+    if (item != null) {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('storedWord', json.encode(item));
+      var day = new DateTime.now().day;
+      prefs.setInt('fetchOn', day);
     }
   }
 
@@ -62,6 +108,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _onTap(int index) {
+    if(index==0){
+      getInit();
+    }
     if (index == 1) {
       Navigator.push(
         context,
@@ -146,9 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Add a new Word ',
         child: Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation
-          .centerDocked,
-          drawer: _drawer(context), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      drawer: _drawer(
+          context), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 

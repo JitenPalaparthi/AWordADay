@@ -114,10 +114,13 @@ func main() {
 	wordGroup := router.Group("/v1/word")
 	{
 		//wordGroup.Use(jwt.Auth(mysupersecretpassword))
-		wordGroup.GET("/getMagicWord", handler.GetWord(session))
+		wordGroup.GET("/getMagicWord", handler.GetMagicWord(session))
+		wordGroup.GET("/getAll", handler.GetAllWords(session))
+		wordGroup.GET("/get/:skip/:limit", handler.GetWords(session))
 		wordGroup.POST("/insert", handler.InsertWord(session))
 		wordGroup.POST("/sentence/insert", handler.InsertSentence(session))
 		wordGroup.POST("/request", handler.InsertRequestedWord(session))
+		wordGroup.DELETE("/:word", handler.DeleteWord(session))
 	}
 
 	router.GET("/ping", func(c *gin.Context) {

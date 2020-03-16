@@ -8,13 +8,24 @@ import (
 	"time"
 )
 
-//FindWords is to find all words from the database
-func (d *Database) FindWords() []models.Word {
-	words := []models.Word{}
-	if d.Client.Find(&words).Error != nil {
-		return nil
+//FindAllWords is to find all words from the database
+func (d *Database) FindAllWords() (words []models.Word, err error) {
+	//words := []models.Word{}
+	err = d.Client.Preload("Sentences").Order("last_updated DESC").Find(&words).Error
+	if err != nil {
+		return nil, err
 	}
-	return words
+	return words, nil
+}
+
+//FindAllWords is to find all words from the database
+func (d *Database) FindWords(skip, limit int64) (words []models.Word, err error) {
+	//words := []models.Word{}
+	err = d.Client.Preload("Sentences").Order("last_updated DESC").Limit(limit).Offset(skip).Find(&words).Error
+	if err != nil {
+		return nil, err
+	}
+	return words, nil
 }
 
 // FindWordByWord is to find a Word by a actual word
@@ -27,16 +38,22 @@ func (d *Database) FindWordByWord(_word string) *models.Word {
 }
 
 // FindMagicWord is to find a Word by a actual word
-func (d *Database) FindMagicWord() *models.Word {
+func (d *Database) FindMagicWord() (word *models.Word, err error) {
 	if d.Client != nil {
-		word := &models.Word{}
-		if d.Client.Preload("Sentences").Order("last_updated DESC").First(word).Error != nil {
-			return nil
+		word = &models.Word{}
+		err := d.Client.Preload("Sentences").Order("last_updated DESC").First(&word).Error
+		if word != nil {
+			return word, nil
 		}
-		fmt.Println(word)
-		return word
+		if err != nil {
+			return nil, err
+		}
+		if word == nil {
+			return nil, errors.New("no records")
+		}
+
 	}
-	return nil
+	return nil, errors.New("no records")
 }
 
 //InsertWord is to insert a nee word
@@ -78,10 +95,23 @@ func (d *Database) UpdateWord(word *models.Word, values map[string]interface{}) 
 	return nil
 }
 
-//DeleteWord is to delete a word
-func (d *Database) DeleteWord(word *models.Word) (err error) {
-	c := d.Client.Delete(word)
+func (d *Database) DeleteWord(_word string) (err error) {
+	word := &models.Word{}
+	c := d.Client.Where("word = ?", _word).First(word)
 	if c.Error != nil {
+		fmt.Println(c.Error)
+		return c.Error
+	}
+	sentence := &models.Sentence{}
+	c1 := d.Client.Where("word_id = ?", word.ID).Delete(sentence)
+	if c1.Error != nil {
+		fmt.Println(c.Error)
+		return c.Error
+	}
+
+	c2 := d.Client.Where("word = ?", _word).Delete(word)
+	if c2.Error != nil {
+		fmt.Println(c.Error)
 		return c.Error
 	}
 	return nil

@@ -1,26 +1,39 @@
 version: "3"
 services:
- # app:
-   # container_name: eduEmpower_service
-   # restart: always
-   # build: ./
-   # ports:
-   #   - "50051:50051"
-   # links:
-   #   - mongo
-   # networks: 
-   #   - backend
-  mongo:
-    container_name: mongo_eduempower
-    image: mongo
+  app:
+    container_name: aWordADay_service
+    restart: always
+    build: ./
     ports:
-      - "27017:27017"
-    volumes:
-      - "./data/db:/data/db"
+      - "50051:50051"
+    links:
+      - node_1,node_2
     networks: 
       - backend
+  node_1:
+        container_name: aWordADay_node1
+        image: cockroachdb/cockroach:latest
+        volumes:
+           - ./data/node_1:/cockroach/cockroach-data
+        command: start --insecure
+        ports:
+            - "26257:26257"
+            - "8080:8080"
+        networks:
+            - backend
+  node_2:
+        container_name: aWordADay_node2
+        image: cockroachdb/cockroach:latest
+        volumes:
+           - ./data/node_2:/cockroach/cockroach-data
+        command: start --insecure
+        ports:
+            - "26257:26257"
+            - "8080:8080"
+        networks:
+            - backend
   nats:
-    container_name: nats_eduempower
+    container_name: aWordADay_nats
     image: nats
     ports:
       - "4222:4222"
