@@ -122,17 +122,17 @@ class SuggestAWordState extends State<SuggestAWord> {
       form.save();
       List<Sentence> _sentences = new List<Sentence>();
       _sentences.add(new Sentence(
-          sentence: _sentence1, updatedBy: _email, status: "Not-Active"));
+          sentence: _sentence1, updatedBy: _email, status: "InActive"));
       _sentences.add(new Sentence(
-          sentence: _sentence2, updatedBy: _email, status: "Not-Active"));
+          sentence: _sentence2, updatedBy: _email, status: "InActive"));
       _sentences.add(new Sentence(
-          sentence: _sentence3, updatedBy: _email, status: "Not-Active"));
+          sentence: _sentence3, updatedBy: _email, status: "InActive"));
 
       Word objword = new Word(
         word: _word,
         meaning: _meaning,
         type: _type,
-        status: "Not-Active",
+        status: "InActive",
         updatedBy: _email,
         sentences: _sentences,
       );

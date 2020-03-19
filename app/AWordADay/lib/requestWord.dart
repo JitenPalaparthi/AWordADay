@@ -71,7 +71,7 @@ class RequestWordState extends State<RequestWord> {
       form.save();
       requestWord_model.RequestWord objword = new requestWord_model.RequestWord(
         word: _word,
-        status: "Not-Active",
+        status: "InActive",
         requestedBy: _email,
       );
       var result = await api_word.Word().requestAWord("http://localhost:50051/v1/word/request", "", objword) ??
