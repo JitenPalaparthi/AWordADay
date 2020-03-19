@@ -41,12 +41,12 @@ func (d *Database) FindWordByWord(_word string) *models.Word {
 func (d *Database) FindMagicWord() (word *models.Word, err error) {
 	if d.Client != nil {
 		word = &models.Word{}
-		err := d.Client.Preload("Sentences").Order("last_updated DESC").First(&word).Error
-		if word != nil {
-			return word, nil
-		}
+		err := d.Client.Where("status='Active'").Preload("Sentences").Order("last_updated DESC").First(&word).Error
 		if err != nil {
 			return nil, err
+		}
+		if word != nil {
+			return word, nil
 		}
 		if word == nil {
 			return nil, errors.New("no records")
@@ -87,7 +87,13 @@ func (d *Database) InsertRequestedWord(requestedWord *models.RequestWord) (err e
 }
 
 // UpdateWord is to update a word based on values that are by map
-func (d *Database) UpdateWord(word *models.Word, values map[string]interface{}) (err error) {
+func (d *Database) UpdateWord(id string, values map[string]interface{}) (err error) {
+	if len(values) < 1 {
+		return errors.New("no values provided to update")
+	}
+	values["last_updated"] = time.Now()
+	word := &models.Word{}
+	word.ID = id
 	c := d.Client.Model(word).Updates(values)
 	if c.Error != nil {
 		return c.Error

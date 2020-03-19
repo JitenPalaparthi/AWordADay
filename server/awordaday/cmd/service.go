@@ -121,6 +121,8 @@ func main() {
 		wordGroup.POST("/sentence/insert", handler.InsertSentence(session))
 		wordGroup.POST("/request", handler.InsertRequestedWord(session))
 		wordGroup.DELETE("/:word", handler.DeleteWord(session))
+		wordGroup.PUT("/update/:id", handler.UpdateWord(session))
+
 	}
 
 	router.GET("/ping", func(c *gin.Context) {

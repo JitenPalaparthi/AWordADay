@@ -222,7 +222,6 @@ func InsertSentence(d *database.Database) func(c *gin.Context) {
 			var sentence models.Sentence
 			sentence = models.Sentence{}
 			sentence.Status = "NOT-ACTIVE"
-			//word.LastUpdated = time.Now()
 			err = json.NewDecoder(c.Request.Body).Decode(&sentence)
 
 			if err != nil {
@@ -247,6 +246,49 @@ func InsertSentence(d *database.Database) func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"status":  "success",
 				"message": "Sentence Successfully Created",
+			})
+			c.Abort()
+			return
+		}
+	}
+}
+
+func UpdateWord(d *database.Database) func(c *gin.Context) {
+	return func(c *gin.Context) {
+		if c.Request.Method == "PUT" {
+			id := c.Param("id")
+			if id == "" {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"status":  "failed",
+					"message": "Id parameter has not been provieded",
+				})
+				c.Abort()
+				return
+			}
+
+			jsonMap := make(map[string]interface{})
+			err := json.NewDecoder(c.Request.Body).Decode(&jsonMap)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"status":  "body seems to be wrong json format",
+					"message": err.Error(),
+				})
+				c.Abort()
+				return
+			}
+
+			err = d.UpdateWord(id, jsonMap)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{
+					"status":  "failed",
+					"message": err.Error(),
+				})
+				c.Abort()
+				return
+			}
+			c.JSON(http.StatusOK, gin.H{
+				"status":  "success",
+				"message": "Word successfulluy updated",
 			})
 			c.Abort()
 			return

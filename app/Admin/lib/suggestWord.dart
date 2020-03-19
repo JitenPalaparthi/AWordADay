@@ -1,7 +1,7 @@
-import 'package:AWordADay/models/sentence.dart';
-import 'package:AWordADay/models/word.dart';
+import 'package:Admin/models/sentence.dart';
+import 'package:Admin/models/word.dart';
 import 'package:flutter/material.dart';
-import 'package:AWordADay/api/word.dart' as api_word;
+import 'package:Admin/api/word.dart' as api_word;
 
 class SuggestAWord extends StatefulWidget {
   final String userType, userCategory;
