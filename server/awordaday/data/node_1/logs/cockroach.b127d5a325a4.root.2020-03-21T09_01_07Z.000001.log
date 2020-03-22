@@ -1,0 +1,58 @@
+I200321 09:01:07.581306 1 util/log/clog.go:1196  [config] file created at: 2020/03/21 09:01:07
+I200321 09:01:07.581306 1 util/log/clog.go:1196  [config] running on machine: b127d5a325a4
+I200321 09:01:07.581306 1 util/log/clog.go:1196  [config] binary: CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200321 09:01:07.581306 1 util/log/clog.go:1196  [config] arguments: [/cockroach/cockroach start --insecure --join=node_1 --listen-addr node_1]
+I200321 09:01:07.581306 1 util/log/clog.go:1196  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+I200321 09:01:07.581293 1 cli/start.go:1144  logging to directory /cockroach/cockroach-data/logs
+W200321 09:01:07.591178 1 cli/start.go:1182  RUNNING IN INSECURE MODE!
+
+- Your cluster is open for any client that can access node_1.
+- Any user, even root, can log in without providing a password.
+- Any user, connecting as root, can read or write any data in your cluster.
+- There is no network encryption nor authentication, and thus no confidentiality.
+
+Check out how to secure your cluster: https://www.cockroachlabs.com/docs/v19.2/secure-a-cluster.html
+I200321 09:01:07.591817 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200321 09:01:07.591970 1 cli/start.go:1052  Using the default setting for --cache (128 MiB).
+  A significantly larger value is usually needed for good performance.
+  If you have a dedicated server a reasonable setting is --cache=.25 (497 MiB).
+I200321 09:01:07.592437 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200321 09:01:07.592505 1 cli/start.go:1065  Using the default setting for --max-sql-memory (128 MiB).
+  A significantly larger value is usually needed in production.
+  If you have a dedicated server a reasonable setting is --max-sql-memory=.25 (497 MiB).
+I200321 09:01:07.593201 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200321 09:01:07.593261 1 cli/start.go:1196  CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200321 09:01:07.884464 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200321 09:01:07.884508 1 server/config.go:394  system total memory: 1.9 GiB
+I200321 09:01:07.884575 1 server/config.go:396  server configuration:
+max offset             500000000
+cache size             128 MiB
+SQL memory pool size   128 MiB
+scan interval          10m0s
+scan min idle time     10ms
+scan max idle time     1s
+event log enabled      true
+I200321 09:01:07.884715 1 cli/start.go:1030  using local environment variables: COCKROACH_CHANNEL=official-docker, COCKROACH_USER=root
+I200321 09:01:07.884761 1 cli/start.go:1037  process identity: uid 0 euid 0 gid 0 egid 0
+I200321 09:01:07.884865 1 cli/start.go:644  starting cockroach node
+I200321 09:01:07.897549 15 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data/cockroach-temp288803056"
+I200321 09:01:08.048858 15 server/server.go:928  [n?] monitoring forward clock jumps based on server.clock.forward_jump_check_enabled
+I200321 09:01:08.051596 15 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data"
+I200321 09:01:08.158186 15 server/config.go:502  [n?] 1 storage engine initialized
+I200321 09:01:08.158225 15 server/config.go:505  [n?] RocksDB cache size: 128 MiB
+I200321 09:01:08.158256 15 server/config.go:505  [n?] store 0: RocksDB, max size 0 B, max open file limit 1043576
+I200321 09:01:08.170920 15 server/server.go:1386  [n?] no stores bootstrapped and --join flag specified, awaiting init command or join with an already initialized node.
+I200321 09:01:10.173236 110 cli/start.go:603  initial startup completed.
+Node will now attempt to join a running cluster, or wait for `cockroach init`.
+Client connections will be accepted after this completes successfully.
+Check the log file(s) for progress. 
+W200321 09:01:38.138313 112 cli/start.go:634  The server appears to be unable to contact the other nodes in the cluster. Please try:
+
+- starting the other nodes, if you haven't already;
+- double-checking that the '--join' and '--listen'/'--advertise' flags are set up correctly;
+- running the 'cockroach init' command if you are trying to initialize a new cluster.
+
+If problems persist, please see https://www.cockroachlabs.com/docs/v19.2/cluster-setup-troubleshooting.html.
+I200321 09:04:11.110070 1 cli/start.go:865  received signal 'terminated'
+I200321 09:04:11.111001 1 cli/start.go:930  initiating graceful shutdown of server
+I200321 09:04:11.111667 1 cli/start.go:981  too early to drain; used hard shutdown instead

@@ -28,30 +28,24 @@ class _MyHomePageState extends State<MyHomePage> {
     final prefs = await SharedPreferences.getInstance();
     final day = prefs.getInt('fetchOn') ?? 0;
     if (day == DateTime.now().day) {
-      storedWord =
-          await fetchFromLocal(); 
-     
-    await setWordState(storedWord);
-     
+      storedWord = await fetchFromLocal();
+
+      await setWordState(storedWord);
     }
     if (storedWord == null || day != DateTime.now().day) {
-      Word item =  await fetchFromServer();
+      Word item = await fetchFromServer();
 
       if (item != null) {
-  
         storeInLocal(item);
         setWordState(item);
-       
       } else {
-        storedWord =
-            await fetchFromLocal(); 
+        storedWord = await fetchFromLocal();
         setWordState(storedWord);
-      
       }
     }
   }
 
-   setWordState(Word item) async {
+  setWordState(Word item) async {
     if (item != null) {
       setState(() {
         _word = item;
@@ -61,8 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void getInitPlatform() async {
-    const url = "http://localhost:50051/v1/word/getMagicWord";
-    var item = await api_word.Word().getMagicWord(url);
+    var item = await api_word.Word().getMagicWord();
     print(item.meaning);
     if (item != null) {
       setState(() {
@@ -73,8 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<Word> fetchFromServer() async {
-    const url = "http://localhost:50051/v1/word/getMagicWord";
-    return await api_word.Word().getMagicWord(url).catchError((e) {
+    return await api_word.Word().getMagicWord().catchError((e) {
       return null;
     });
   }
@@ -108,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _onTap(int index) {
-    if(index==0){
+    if (index == 0) {
       getInit();
     }
     if (index == 1) {

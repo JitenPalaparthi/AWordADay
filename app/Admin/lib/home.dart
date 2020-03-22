@@ -188,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           getContainer("Sentence-1:", 15, FontWeight.normal)),
                   Expanded(
                       child: getContainer(
-                          word.sentences[0].sentence, 15, FontWeight.normal)),
+                          word.sentences.length>=1?word.sentences[0].sentence:null, 15, FontWeight.normal)),
                 ],
               ),
               Row(
@@ -199,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           getContainer("Sentence-2:", 15, FontWeight.normal)),
                   Expanded(
                       child: getContainer(
-                          word.sentences[1].sentence, 15, FontWeight.normal)),
+                         word.sentences.length>=2?word.sentences[1].sentence:null, 15, FontWeight.normal)),
                 ],
               ),
               Row(
@@ -210,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           getContainer("Sentence-3:", 15, FontWeight.normal)),
                   Expanded(
                       child: getContainer(
-                          word.sentences[2].sentence, 15, FontWeight.normal)),
+                          word.sentences.length>=3?word.sentences[2].sentence:null, 15, FontWeight.normal)),
                 ],
               ),
               Row(
@@ -240,6 +240,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget getContainer(String text, double size, FontWeight weight) {
+    if(text==null){
+      return Container();
+    }
     return Container(
       child: new Text(
         text,

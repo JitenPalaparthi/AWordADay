@@ -1,13 +1,16 @@
 package database
 
 import (
+	"time"
+
+	"github.com/golang/glog"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	// Necessary in order to check for transaction retry error codes.
 )
 
 const (
-	CONNECTION_RETRIES = 3
+	CONNECTION_RETRIES = 5
 )
 
 type Database struct {
@@ -21,6 +24,8 @@ try:
 	connection, err := gorm.Open(driver, dataSource)
 	if err != nil {
 		if retries < CONNECTION_RETRIES {
+			time.Sleep(5000)
+			glog.Info("Trying to connect ---", retries)
 			goto try
 		}
 		return nil, err

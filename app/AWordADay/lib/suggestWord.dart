@@ -137,7 +137,7 @@ class SuggestAWordState extends State<SuggestAWord> {
         sentences: _sentences,
       );
       var result = await api_word.Word()
-              .addWord("http://localhost:50051/v1/word/insert", "", objword) ??
+              .addWord("", objword) ??
           null;
       if (result.status == "success") {
         Navigator.pop(context, true);

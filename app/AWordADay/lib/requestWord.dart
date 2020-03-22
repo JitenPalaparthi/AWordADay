@@ -74,7 +74,7 @@ class RequestWordState extends State<RequestWord> {
         status: "InActive",
         requestedBy: _email,
       );
-      var result = await api_word.Word().requestAWord("http://localhost:50051/v1/word/request", "", objword) ??
+      var result = await api_word.Word().requestAWord("", objword) ??
           null;
       if (result.status == "success") {
         Navigator.pop(context, true);

@@ -64,12 +64,13 @@ func main() {
 
 	glog.Info(provider, dbConnectionStr)
 	session, err := database.New(provider, dbConnectionStr)
+	glog.Info(dbConnectionStr)
 	defer glog.Flush()
 	if err != nil {
 		if session != nil {
 			session.Client.Close()
 		}
-		glog.Error("no connection to the database")
+		glog.Fatal("no connection to the database", err.Error())
 	}
 	if session != nil {
 		defer session.Client.Close()

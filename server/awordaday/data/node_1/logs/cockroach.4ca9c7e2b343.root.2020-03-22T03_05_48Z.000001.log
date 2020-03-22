@@ -1,0 +1,141 @@
+I200322 03:05:48.158092 1 util/log/clog.go:1196  [config] file created at: 2020/03/22 03:05:48
+I200322 03:05:48.158092 1 util/log/clog.go:1196  [config] running on machine: 4ca9c7e2b343
+I200322 03:05:48.158092 1 util/log/clog.go:1196  [config] binary: CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200322 03:05:48.158092 1 util/log/clog.go:1196  [config] arguments: [/cockroach/cockroach start --insecure --host=127.0.0.1 --join=node_1]
+I200322 03:05:48.158092 1 util/log/clog.go:1196  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+I200322 03:05:48.158077 1 cli/start.go:1144  logging to directory /cockroach/cockroach-data/logs
+W200322 03:05:48.163830 1 cli/start.go:1182  RUNNING IN INSECURE MODE!
+
+- Your cluster is open for any client that can access 127.0.0.1.
+- Any user, even root, can log in without providing a password.
+- Any user, connecting as root, can read or write any data in your cluster.
+- There is no network encryption nor authentication, and thus no confidentiality.
+
+Check out how to secure your cluster: https://www.cockroachlabs.com/docs/v19.2/secure-a-cluster.html
+I200322 03:05:48.164744 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200322 03:05:48.164868 1 cli/start.go:1052  Using the default setting for --cache (128 MiB).
+  A significantly larger value is usually needed for good performance.
+  If you have a dedicated server a reasonable setting is --cache=.25 (497 MiB).
+I200322 03:05:48.165180 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200322 03:05:48.165259 1 cli/start.go:1065  Using the default setting for --max-sql-memory (128 MiB).
+  A significantly larger value is usually needed in production.
+  If you have a dedicated server a reasonable setting is --max-sql-memory=.25 (497 MiB).
+I200322 03:05:48.165619 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200322 03:05:48.165687 1 cli/start.go:1196  CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200322 03:05:48.464766 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200322 03:05:48.464808 1 server/config.go:394  system total memory: 1.9 GiB
+I200322 03:05:48.464861 1 server/config.go:396  server configuration:
+max offset             500000000
+cache size             128 MiB
+SQL memory pool size   128 MiB
+scan interval          10m0s
+scan min idle time     10ms
+scan max idle time     1s
+event log enabled      true
+I200322 03:05:48.464902 1 cli/start.go:1030  using local environment variables: COCKROACH_CHANNEL=official-docker, COCKROACH_USER=root
+I200322 03:05:48.464942 1 cli/start.go:1037  process identity: uid 0 euid 0 gid 0 egid 0
+I200322 03:05:48.465665 1 cli/start.go:644  starting cockroach node
+I200322 03:05:48.472848 24 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data/cockroach-temp857215468"
+I200322 03:05:48.702364 24 server/server.go:928  [n?] monitoring forward clock jumps based on server.clock.forward_jump_check_enabled
+I200322 03:05:48.707006 24 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data"
+I200322 03:05:48.874966 24 server/config.go:502  [n?] 1 storage engine initialized
+I200322 03:05:48.875017 24 server/config.go:505  [n?] RocksDB cache size: 128 MiB
+I200322 03:05:48.875055 24 server/config.go:505  [n?] store 0: RocksDB, max size 0 B, max open file limit 1043576
+W200322 03:05:48.902824 24 gossip/gossip.go:1517  [n?] no incoming or outgoing connections
+I200322 03:05:48.905999 24 server/server.go:978  [n?] Sleeping till wall time 1584846348905406700 to catches up to 1584846349202182901 to ensure monotonicity. Delta: 296.776201ms
+W200322 03:05:48.908019 41 vendor/google.golang.org/grpc/clientconn.go:1206  grpc: addrConn.createTransport failed to connect to {node_1:26257 0  <nil>}. Err :connection error: desc = "transport: Error while dialing dial tcp 172.21.0.3:26257: connect: connection refused". Reconnecting...
+I200322 03:05:48.909037 91 vendor/github.com/cockroachdb/circuitbreaker/circuitbreaker.go:322  [n?] circuitbreaker: gossip 127.0.0.1:26257->node_1:26257 tripped: initial connection heartbeat failed: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.21.0.3:26257: connect: connection refused"
+I200322 03:05:48.909078 91 vendor/github.com/cockroachdb/circuitbreaker/circuitbreaker.go:447  [n?] circuitbreaker: gossip 127.0.0.1:26257->node_1:26257 event: BreakerTripped
+W200322 03:05:48.909120 91 gossip/client.go:118  [n?] failed to start gossip client to node_1:26257: initial connection heartbeat failed: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.21.0.3:26257: connect: connection refused"
+I200322 03:05:49.203075 24 gossip/gossip.go:394  [n1] NodeDescriptor set to node_id:1 address:<network_field:"tcp" address_field:"127.0.0.1:26257" > attrs:<> locality:<> ServerVersion:<major_val:19 minor_val:2 patch:0 unstable:0 > build_tag:"v19.2.4" started_at:1584846349202911100 cluster_name:"" sql_address:<network_field:"tcp" address_field:"127.0.0.1:26257" > 
+W200322 03:05:49.237638 135 storage/replica_range_lease.go:554  can't determine lease status due to node liveness error: node not in the liveness table
+github.com/cockroachdb/cockroach/pkg/storage.init.ializers
+	/go/src/github.com/cockroachdb/cockroach/pkg/storage/node_liveness.go:44
+runtime.main
+	/usr/local/go/src/runtime/proc.go:188
+runtime.goexit
+	/usr/local/go/src/runtime/asm_amd64.s:1337
+W200322 03:05:49.237719 135 storage/store.go:1530  [n1,s1,r6/1:/Table/{SystemCon…-11}] could not gossip system config: [NotLeaseHolderError] r6: replica (n1,s1):1 not lease holder; lease holder unknown
+I200322 03:05:49.371720 24 server/node.go:431  [n1] initialized store [n1,s1]: disk (capacity=116 TiB, available=79 TiB, used=3.3 MiB, logicalBytes=300 KiB), ranges=24, leases=2, queries=0.00, writes=0.00, bytesPerReplica={p10=0.00 p25=0.00 p50=0.00 p75=645.00 p90=11197.00 pMax=262011.00}, writesPerReplica={p10=0.00 p25=0.00 p50=0.00 p75=0.00 p90=0.00 pMax=0.00}
+I200322 03:05:49.371972 24 storage/stores.go:240  [n1] read 0 node addresses from persistent storage
+I200322 03:05:49.372179 24 server/node.go:645  [n1] connecting to gossip network to verify cluster ID...
+I200322 03:05:49.372253 24 server/node.go:665  [n1] node connected via gossip and verified as part of cluster "72efe42b-26c1-40d2-9416-d246996c4d4d"
+I200322 03:05:49.372472 24 server/node.go:512  [n1] node=1: started with [<no-attributes>=/cockroach/cockroach-data] engine(s) and attributes []
+I200322 03:05:49.390961 24 server/server.go:1514  [n1] starting http server at 127.0.0.1:8080 (use: 127.0.0.1:8080)
+I200322 03:05:49.391047 24 server/server.go:1521  [n1] starting grpc/postgres server at 127.0.0.1:26257
+I200322 03:05:49.391085 24 server/server.go:1522  [n1] advertising CockroachDB node at 127.0.0.1:26257
+I200322 03:05:49.437281 186 storage/node_liveness.go:474  [n1,liveness-hb] heartbeat failed on epoch increment; retrying
+I200322 03:05:49.614813 208 sql/event_log.go:130  [n1,intExec=add-constraints-ttl] Event: "set_zone_config", target: 25, info: {Target:TABLE system.public.replication_constraint_stats Config: Options:"gc.ttlseconds" = 600 User:root}
+I200322 03:05:49.650861 331 sql/event_log.go:130  [n1,intExec=add-replication-status-ttl] Event: "set_zone_config", target: 27, info: {Target:TABLE system.public.replication_stats Config: Options:"gc.ttlseconds" = 600 User:root}
+I200322 03:05:49.655454 337 sql/sqlbase/structured.go:1529  [n1,intExec=update-reports-meta-generated] publish: descID=28 (reports_meta) version=2 mtime=1970-01-01 00:00:00 +0000 UTC
+I200322 03:05:49.675652 337 sql/event_log.go:130  [n1,intExec=update-reports-meta-generated] Event: "alter_table", target: 28, info: {TableName:system.public.reports_meta Statement:ALTER TABLE system.reports_meta ALTER COLUMN generated SET DATA TYPE TIMESTAMPTZ User:node MutationID:0 CascadeDroppedViews:[]}
+I200322 03:05:49.676694 337 sql/schema_changer.go:965  [n1,intExec=update-reports-meta-generated,scExec] schema change on reports_meta (28 v2) mutation 0 starting execution...
+I200322 03:05:49.676728 337 sql/schema_changer.go:1258  [n1,intExec=update-reports-meta-generated,scExec] waiting for a single version of table 28...
+I200322 03:05:49.682706 337 sql/schema_changer.go:1260  [n1,intExec=update-reports-meta-generated,scExec] waiting for a single version of table 28... done (at v 2)
+I200322 03:05:49.684128 450 sql/sqlbase/structured.go:1529  [n1,intExec=update-reports-meta-generated] publish: descID=25 (replication_constraint_stats) version=2 mtime=1970-01-01 00:00:00 +0000 UTC
+I200322 03:05:49.694466 450 sql/event_log.go:130  [n1,intExec=update-reports-meta-generated] Event: "alter_table", target: 25, info: {TableName:system.public.replication_constraint_stats Statement:ALTER TABLE system.replication_constraint_stats ALTER COLUMN violation_start SET DATA TYPE TIMESTAMPTZ User:node MutationID:0 CascadeDroppedViews:[]}
+I200322 03:05:49.695641 450 sql/schema_changer.go:965  [n1,intExec=update-reports-meta-generated,scExec] schema change on replication_constraint_stats (25 v2) mutation 0 starting execution...
+I200322 03:05:49.695678 450 sql/schema_changer.go:1258  [n1,intExec=update-reports-meta-generated,scExec] waiting for a single version of table 25...
+I200322 03:05:49.701151 450 sql/schema_changer.go:1260  [n1,intExec=update-reports-meta-generated,scExec] waiting for a single version of table 25... done (at v 2)
+I200322 03:05:49.705612 24 server/server.go:1590  [n1] done ensuring all necessary migrations have run
+I200322 03:05:49.705709 24 server/server.go:1841  [n1] serving sql connections
+I200322 03:05:49.706333 24 cli/start.go:803  [config] clusterID: 72efe42b-26c1-40d2-9416-d246996c4d4d
+I200322 03:05:49.706375 24 cli/start.go:812  node startup completed:
+CockroachDB node starting at 2020-03-22 03:05:49.7062581 +0000 UTC (took 1.6s)
+build:               CCL v19.2.4 @ 2020/02/06 21:55:19 (go1.12.12)
+webui:               http://127.0.0.1:8080
+sql:                 postgresql://root@127.0.0.1:26257?sslmode=disable
+RPC client flags:    /cockroach/cockroach <client cmd> --host=127.0.0.1:26257 --insecure
+logs:                /cockroach/cockroach-data/logs
+temp dir:            /cockroach/cockroach-data/cockroach-temp857215468
+external I/O path:   /cockroach/cockroach-data/extern
+store[0]:            path=/cockroach/cockroach-data
+status:              restarted pre-existing node
+clusterID:           72efe42b-26c1-40d2-9416-d246996c4d4d
+nodeID:              1
+I200322 03:05:49.711950 399 server/server_update.go:53  [n1] no need to upgrade, cluster already at the newest version
+I200322 03:05:49.721563 401 sql/event_log.go:130  [n1] Event: "node_restart", target: 1, info: {Descriptor:{NodeID:1 Address:127.0.0.1:26257 Attrs: Locality: ServerVersion:19.2 BuildTag:v19.2.4 StartedAt:1584846349202911100 LocalityAddress:[] ClusterName: SQLAddress:127.0.0.1:26257} ClusterID:72efe42b-26c1-40d2-9416-d246996c4d4d StartedAt:1584846349202911100 LastUp:1584846328708008100}
+I200322 03:05:49.906950 80 gossip/gossip.go:1531  [n1] node has connected to cluster via gossip
+I200322 03:05:49.907125 80 storage/stores.go:259  [n1] wrote 0 node addresses to persistent storage
+W200322 03:05:49.908733 41 vendor/google.golang.org/grpc/clientconn.go:1206  grpc: addrConn.createTransport failed to connect to {node_1:26257 0  <nil>}. Err :connection error: desc = "transport: Error while dialing cannot reuse client connection". Reconnecting...
+I200322 03:05:59.345800 180 server/status/runtime.go:498  [n1] runtime stats: 107 MiB RSS, 131 goroutines, 92 MiB/31 MiB/135 MiB GO alloc/idle/total, 14 MiB/17 MiB CGO alloc/total, 0.0 CGO/sec, 0.0/0.0 %(u/s)time, 0.0 %gc (9x), 21 KiB/16 KiB (r/w)net
+I200322 03:06:09.345371 180 server/status/runtime.go:498  [n1] runtime stats: 116 MiB RSS, 131 goroutines, 100 MiB/23 MiB/135 MiB GO alloc/idle/total, 14 MiB/17 MiB CGO alloc/total, 62.1 CGO/sec, 1.2/2.0 %(u/s)time, 0.0 %gc (0x), 482 B/312 B (r/w)net
+I200322 03:06:09.436611 143 storage/store.go:2364  [n1,s1] sstables (read amplification = 1):
+0 [ 79K 1 ]: 79K
+I200322 03:06:09.436718 143 storage/store.go:2365  [n1,s1] 
+** Compaction Stats [default] **
+Level    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  L0      1/0   79.28 KB   0.5      0.0     0.0      0.0       0.0      0.0       0.0   1.0      0.0      2.7      0.03              0.00         1    0.029       0      0
+ Sum      1/0   79.28 KB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   1.0      0.0      2.7      0.03              0.00         1    0.029       0      0
+ Int      0/0    0.00 KB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   1.0      0.0      2.7      0.03              0.00         1    0.029       0      0
+
+** Compaction Stats [default] **
+Priority    Files   Size     Score Read(GB)  Rn(GB) Rnp1(GB) Write(GB) Wnew(GB) Moved(GB) W-Amp Rd(MB/s) Wr(MB/s) Comp(sec) CompMergeCPU(sec) Comp(cnt) Avg(sec) KeyIn KeyDrop
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+User      0/0    0.00 KB   0.0      0.0     0.0      0.0       0.0      0.0       0.0   0.0      0.0      2.7      0.03              0.00         1    0.029       0      0
+Uptime(secs): 20.7 total, 20.7 interval
+Flush(GB): cumulative 0.000, interval 0.000
+AddFile(GB): cumulative 0.000, interval 0.000
+AddFile(Total Files): cumulative 0, interval 0
+AddFile(L0 Files): cumulative 0, interval 0
+AddFile(Keys): cumulative 0, interval 0
+Cumulative compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Interval compaction: 0.00 GB write, 0.00 MB/s write, 0.00 GB read, 0.00 MB/s read, 0.0 seconds
+Stalls(count): 0 level0_slowdown, 0 level0_slowdown_with_compaction, 0 level0_numfiles, 0 level0_numfiles_with_compaction, 0 stop for pending_compaction_bytes, 0 slowdown for pending_compaction_bytes, 0 memtable_compaction, 0 memtable_slowdown, interval 0 total count
+estimated_pending_compaction_bytes: 0 B
+I200322 03:06:19.345400 180 server/status/runtime.go:498  [n1] runtime stats: 125 MiB RSS, 131 goroutines, 108 MiB/15 MiB/135 MiB GO alloc/idle/total, 14 MiB/17 MiB CGO alloc/total, 35.5 CGO/sec, 1.1/1.7 %(u/s)time, 0.0 %gc (0x), 482 B/312 B (r/w)net
+I200322 03:06:29.312445 180 server/status/runtime.go:498  [n1] runtime stats: 133 MiB RSS, 132 goroutines, 116 MiB/7.1 MiB/135 MiB GO alloc/idle/total, 14 MiB/18 MiB CGO alloc/total, 25.2 CGO/sec, 0.9/1.8 %(u/s)time, 0.0 %gc (0x), 0 B/0 B (r/w)net
+I200322 03:06:39.311708 180 server/status/runtime.go:498  [n1] runtime stats: 138 MiB RSS, 132 goroutines, 82 MiB/37 MiB/135 MiB GO alloc/idle/total, 14 MiB/18 MiB CGO alloc/total, 29.8 CGO/sec, 1.2/1.8 %(u/s)time, 0.0 %gc (1x), 0 B/0 B (r/w)net
+I200322 03:06:48.062077 1 cli/start.go:865  received signal 'terminated'
+I200322 03:06:48.063058 1 cli/start.go:930  initiating graceful shutdown of server
+I200322 03:06:48.066421 1318 util/stop/stopper.go:542  [server drain process] quiescing; tasks left:
+1      [async] stats.Refresher: maybeRefreshStats
+1      [async] intent_resolver_ir_batcher
+1      [async] intent_resolver_gc_batcher
+1      [async] closedts-rangefeed-subscriber
+I200322 03:06:48.067753 1318 util/stop/stopper.go:542  [server drain process] quiescing; tasks left:
+1      [async] closedts-rangefeed-subscriber
+I200322 03:06:48.069823 1318 storage/engine/rocksdb.go:762  closing rocksdb instance at "/cockroach/cockroach-data/cockroach-temp857215468"
+I200322 03:06:48.094040 1318 storage/engine/rocksdb.go:762  closing rocksdb instance at "/cockroach/cockroach-data"
+I200322 03:06:48.105322 1 cli/start.go:976  server drained and shutdown completed

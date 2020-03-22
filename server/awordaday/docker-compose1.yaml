@@ -1,0 +1,37 @@
+version: '2'
+
+networks:
+  roachnet:
+
+services:
+    app:
+      container_name: aworkaday_cloud
+      restart: always
+      build: ./
+      ports:
+      - "50051:50051"
+     
+    networks: 
+     - backend
+    links:
+      - cockroach
+
+    cockroach:
+        image: cockroachdb/cockroach:v1.1.7
+        networks:
+          roachnet:
+            aliases:
+              - cockroach-backend
+        restart: unless-stopped
+        ports:
+            # database port
+            - "26257:26257"
+            # admin-ui port
+            - "8080:8080"
+        volumes:
+            - ./scripts/cockroach-init.sh:/cockroach/cockroach-init.sh
+        environment:
+            COCKROACH_USER: halroach
+            COCKROACH_DB: recipes
+        entrypoint: "/bin/bash"
+        command: /cockroach/cockroach-init.sh

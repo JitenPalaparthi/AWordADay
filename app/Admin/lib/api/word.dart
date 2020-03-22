@@ -8,10 +8,26 @@ import 'package:http/http.dart' as http;
 import '../models/response.dart';
 
 class Word {
-  final String BASE_URL =
-      "http://localhost:50051/v1/";
-  Future<word_model.Word> getMagicWord(String url) async {
+  final String baseURL =
+      "http://awordaday:50051/v1/";
+  
+  final String magicWordURL=
+      "word/getMagicWord";
+
+  final String getWordsURL =
+      "word/get/";
+final String addWordURL =
+      "word/insert";
+final String requestAWordURL =
+      "word/request";
+
+  final String updateWordURL =
+      "word/update/";
+  final String deleteWordURL ="word/";
+
+  Future<word_model.Word> getMagicWord() async {
     try {
+      String url=baseURL+magicWordURL;
       final response = await http.get(url);
       // headers: {HttpHeaders.authorizationHeader: 'Bearer $token'});
       if (response.statusCode == 200) {
@@ -28,7 +44,7 @@ class Word {
 
   Future<List<word_model.Word>> getWords(int skip, limit) async {
     try {
-      var url = "http://localhost:50051/v1/word/get/" +
+      var url = baseURL+getWordsURL +
           skip.toString() +
           "/" +
           limit.toString();
@@ -54,7 +70,8 @@ class Word {
   }
 
   Future<GeneralResponse> addWord(
-      String url, token, word_model.Word body) async {
+      String token, word_model.Word body) async {
+        String url= baseURL+addWordURL;
     var response = await http.post(url, body: json.encode(body), headers: {
       "accept": "application/json",
       "content-type": "application/json",
@@ -65,7 +82,8 @@ class Word {
   }
 
   Future<GeneralResponse> requestAWord(
-      String url, token, requestWord_model.RequestWord body) async {
+      String token, requestWord_model.RequestWord body) async {
+      String url=baseURL+requestAWordURL;
     var response = await http.post(url, body: json.encode(body), headers: {
       "accept": "application/json",
       "content-type": "application/json",
@@ -75,7 +93,7 @@ class Word {
         json.decode(response.body), response.statusCode);
   }
   Future<GeneralResponse> updateWord(String token,id, Map<String,dynamic> body)async{
-    String url="http://localhost:50051/v1/word/update/"+id;
+    String url=baseURL+updateWordURL+id;
     var response = await http.put(url,body: json.encode(body), headers: {
       "accept": "application/json",
       "content-type": "application/json",
@@ -86,7 +104,7 @@ class Word {
   }
 
    Future<GeneralResponse> deleteWord(String token,word)async{
-    String url="http://localhost:50051/v1/word/"+word;
+    String url=baseURL+deleteWordURL+word;
     var response = await http.delete(url, headers: {
       "accept": "application/json",
       "content-type": "application/json",

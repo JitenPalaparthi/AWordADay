@@ -1,0 +1,212 @@
+I200320 19:32:54.528024 1 util/log/clog.go:1196  [config] file created at: 2020/03/20 19:32:54
+I200320 19:32:54.528024 1 util/log/clog.go:1196  [config] running on machine: db9313ae3e97
+I200320 19:32:54.528024 1 util/log/clog.go:1196  [config] binary: CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200320 19:32:54.528024 1 util/log/clog.go:1196  [config] arguments: [/cockroach/cockroach start --insecure --join=node_1]
+I200320 19:32:54.528024 1 util/log/clog.go:1196  line format: [IWEF]yymmdd hh:mm:ss.uuuuuu goid file:line msg utf8=✓
+I200320 19:32:54.527935 1 cli/start.go:1144  logging to directory /cockroach/cockroach-data/logs
+W200320 19:32:54.532116 1 cli/start.go:1182  RUNNING IN INSECURE MODE!
+
+- Your cluster is open for any client that can access <all your IP addresses>.
+- Any user, even root, can log in without providing a password.
+- Any user, connecting as root, can read or write any data in your cluster.
+- There is no network encryption nor authentication, and thus no confidentiality.
+
+Check out how to secure your cluster: https://www.cockroachlabs.com/docs/v19.2/secure-a-cluster.html
+I200320 19:32:54.533519 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200320 19:32:54.533699 1 cli/start.go:1052  Using the default setting for --cache (128 MiB).
+  A significantly larger value is usually needed for good performance.
+  If you have a dedicated server a reasonable setting is --cache=.25 (497 MiB).
+I200320 19:32:54.534012 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+W200320 19:32:54.534054 1 cli/start.go:1065  Using the default setting for --max-sql-memory (128 MiB).
+  A significantly larger value is usually needed in production.
+  If you have a dedicated server a reasonable setting is --max-sql-memory=.25 (497 MiB).
+I200320 19:32:54.534353 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200320 19:32:54.534401 1 cli/start.go:1196  CockroachDB CCL v19.2.4 (x86_64-unknown-linux-gnu, built 2020/02/06 21:55:19, go1.12.12)
+I200320 19:32:54.744571 1 server/status/recorder.go:597  available memory from cgroups is unsupported, using system memory 1.9 GiB instead: failed to find cgroup memory limit
+I200320 19:32:54.744648 1 server/config.go:394  system total memory: 1.9 GiB
+I200320 19:32:54.744705 1 server/config.go:396  server configuration:
+max offset             500000000
+cache size             128 MiB
+SQL memory pool size   128 MiB
+scan interval          10m0s
+scan min idle time     10ms
+scan max idle time     1s
+event log enabled      true
+I200320 19:32:54.744742 1 cli/start.go:1030  using local environment variables: COCKROACH_USER=root, COCKROACH_CHANNEL=official-docker
+I200320 19:32:54.744779 1 cli/start.go:1037  process identity: uid 0 euid 0 gid 0 egid 0
+I200320 19:32:54.744880 1 cli/start.go:644  starting cockroach node
+I200320 19:32:54.749290 25 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data/cockroach-temp308484296"
+I200320 19:32:54.897395 25 server/server.go:928  [n?] monitoring forward clock jumps based on server.clock.forward_jump_check_enabled
+I200320 19:32:54.903364 25 storage/engine/rocksdb.go:622  opening rocksdb instance at "/cockroach/cockroach-data"
+I200320 19:32:54.999538 25 server/config.go:502  [n?] 1 storage engine initialized
+I200320 19:32:54.999587 25 server/config.go:505  [n?] RocksDB cache size: 128 MiB
+I200320 19:32:54.999620 25 server/config.go:505  [n?] store 0: RocksDB, max size 0 B, max open file limit 1043576
+W200320 19:32:55.015068 25 gossip/gossip.go:1517  [n?] no incoming or outgoing connections
+I200320 19:32:55.015369 25 server/server.go:1386  [n?] no stores bootstrapped and --join flag specified, awaiting init command or join with an already initialized node.
+I200320 19:32:55.025241 30 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:32:55.025748 116 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:32:55.026197 30 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:32:56.023006 105 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:32:56.024270 136 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:32:56.024851 105 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+W200320 19:32:57.019234 99 cli/start.go:996  neither --listen-addr nor --advertise-addr was specified.
+The server will advertise "db9313ae3e97" to other nodes, is this routable?
+
+Consider using:
+- for local-only servers:  --listen-addr=localhost
+- for multi-node clusters: --advertise-addr=<host/IP addr>
+I200320 19:32:57.019403 99 cli/start.go:603  initial startup completed.
+Node will now attempt to join a running cluster, or wait for `cockroach init`.
+Client connections will be accepted after this completes successfully.
+Check the log file(s) for progress. 
+I200320 19:32:57.027301 118 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:32:57.027843 109 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:32:57.028309 118 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:32:58.031092 113 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:32:58.031600 59 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:32:58.032269 113 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:32:59.035164 143 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:32:59.036378 61 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:32:59.037197 143 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:00.040329 162 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:00.041090 149 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:00.041820 162 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:01.044739 180 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:01.045294 166 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:01.045919 180 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:02.051550 154 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:02.051869 168 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:02.052377 154 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:03.059025 183 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:03.059818 173 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:03.060125 183 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:04.066361 124 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:04.067467 187 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:04.067873 124 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:05.072896 158 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:05.074018 175 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:05.075434 158 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:06.076670 211 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:06.078087 189 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:06.078702 211 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:07.049444 190 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:07.050502 242 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:07.050854 190 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:08.055581 196 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:08.056478 231 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:08.057280 196 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:09.063551 202 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:09.064584 205 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:09.065115 202 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:10.067968 245 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:10.068829 215 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:10.069073 245 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:11.069478 216 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:11.070071 220 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:11.070264 216 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:12.079257 209 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:12.079907 261 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:12.080380 209 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:13.084283 238 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:13.085487 225 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:13.086092 238 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:14.088233 277 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:14.089083 281 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:14.089700 277 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:15.092474 285 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:15.093393 290 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:15.093870 285 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:16.097959 263 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:16.098525 309 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:16.099241 263 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:17.105804 269 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:17.106905 273 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:17.107578 269 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:18.111232 325 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:18.111423 249 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:18.111793 325 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:19.114978 310 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:19.115744 292 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:19.116574 310 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:20.119002 316 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:20.120228 320 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:20.120768 316 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:21.122253 340 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:21.122864 344 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:21.123165 340 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:22.126405 250 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:22.128892 333 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:22.129374 250 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:23.129162 300 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:23.129688 304 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:23.130620 300 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:24.135289 305 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:24.135791 357 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:24.136232 305 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+W200320 19:33:24.984537 358 cli/start.go:634  The server appears to be unable to contact the other nodes in the cluster. Please try:
+
+- starting the other nodes, if you haven't already;
+- double-checking that the '--join' and '--listen'/'--advertise' flags are set up correctly;
+- running the 'cockroach init' command if you are trying to initialize a new cluster.
+
+If problems persist, please see https://www.cockroachlabs.com/docs/v19.2/cluster-setup-troubleshooting.html.
+I200320 19:33:25.143019 372 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:25.144599 346 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:25.145130 372 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:26.150304 378 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:26.150866 255 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:26.151112 378 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:27.161842 359 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:27.163527 362 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:27.163907 359 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:28.167914 349 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:28.168376 351 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:28.169298 349 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:29.168427 402 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:29.169044 353 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:29.169436 402 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:30.171406 405 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:30.171980 419 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:30.172411 405 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:31.179123 409 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:31.179756 424 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:31.180100 409 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:32.188333 425 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:32.189245 434 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:32.189750 425 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:33.195181 390 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:33.197506 432 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:33.199496 390 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:34.199462 453 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:34.200378 436 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:34.201267 453 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:35.204574 456 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:35.205042 438 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:35.205242 456 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:36.210949 415 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:36.212263 440 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:36.212836 415 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:37.179597 442 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:37.179956 397 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:37.180406 442 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:38.189847 445 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:38.191040 467 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:38.192941 445 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:39.195280 471 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:39.196018 482 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:39.196566 471 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:40.200466 448 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:40.202704 475 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:40.203429 448 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:41.205315 476 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:41.206098 514 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:41.206395 476 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:42.209591 502 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:42.211070 516 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:42.211425 502 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:43.210458 488 gossip/client.go:124  [n?] started gossip client to node_1:26257
+I200320 19:33:43.210833 509 gossip/server.go:227  [n?] received initial cluster-verification connection from db9313ae3e97:26257
+I200320 19:33:43.211179 488 gossip/client.go:131  [n?] closing client to node_1:26257: stopping outgoing client to n0 (node_1:26257); loopback connection
+I200320 19:33:43.248838 1 cli/start.go:865  received signal 'terminated'
+I200320 19:33:43.249994 1 cli/start.go:930  initiating graceful shutdown of server
+I200320 19:33:43.250632 1 cli/start.go:981  too early to drain; used hard shutdown instead
