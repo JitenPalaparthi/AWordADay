@@ -2,7 +2,9 @@ package channels
 
 import (
 	"fmt"
-	"time"
+
+	"awordaday/database"
+	"awordaday/models"
 
 	nats "github.com/nats-io/nats.go"
 )
@@ -13,19 +15,19 @@ type Message struct {
 	Subject string
 }
 
-type Audit struct {
+/*type Audit struct {
 	Data     interface{}
 	IP       string
 	Device   string
 	URLPath  string
 	Headers  map[string][]string
 	DateTime time.Time
-}
+}*/
 
 var (
 	chanMessage chan Message
 	NC          *nats.Conn
-	ChanAudit   chan Audit
+	ChanAudit   chan models.Audit
 )
 
 // Inidiate the channel at the beginning of the handler usage
@@ -38,8 +40,8 @@ func Init(nc *nats.Conn) {
 
 func InitAudit(session interface{}, database string) {
 	if ChanAudit == nil {
-		ChanAudit = make(chan Audit, 20)
-		go ProcessAudit(session, database)
+		ChanAudit = make(chan models.Audit, 20)
+		go ProcessAudit(session)
 	}
 }
 
@@ -55,10 +57,11 @@ func ProcessMessage(nc *nats.Conn) {
 	}
 }
 
-func ProcessAudit(session interface{}, database string) {
-	//for audit := range ChanAudit {
-	//if err := session.(*mgo.Session).DB(database).C("audits").Insert(audit); err != nil {
-	//	return
-	//}
-	//}
+func ProcessAudit(session interface{}) {
+	for audit := range ChanAudit {
+
+		if err := session.(*database.Database).InsertAudit(&audit); err != nil {
+			return
+		}
+	}
 }

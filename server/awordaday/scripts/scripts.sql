@@ -38,3 +38,14 @@ Create Table IF NOT EXISTS request_words
     last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     requested_by STRING NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS  audits
+(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    data STRING unique NOT NULL,
+    ip STRING NOT NULL,
+    device STRING NOT NULL,
+    urlPath STRING NOT NULL ,
+    headers STRING NOT NULL ,
+    dateTime STRING NOT NULL
+);

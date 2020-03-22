@@ -3,12 +3,13 @@ package main
 import (
 	"awordaday/channels"
 	"awordaday/database"
+	"awordaday/models"
+	"fmt"
+
 	"awordaday/handler"
 	"awordaday/helper"
 
 	"bytes"
-
-	"encoding/json"
 
 	"io/ioutil"
 	"time"
@@ -21,19 +22,19 @@ import (
 )
 
 const (
-	port = ":50051"
+	port              = ":50051"
+	connectionRetries = 5
 )
 
 var (
-	provider        string
-	dbConnectionStr string
-	dbName          string
-	natsConnection  string
-	err             error
-)
-
-var (
+	provider              string
+	dbConnectionStr       string
+	dbName                string
+	natsConnection        string
+	err                   error
 	mysupersecretpassword = "TheAimIsToUseThisJWT"
+
+	nc *nats.Conn
 )
 
 func init() {
@@ -61,7 +62,6 @@ func init() {
 func main() {
 
 	//Connect to the database
-
 	glog.Info(provider, dbConnectionStr)
 	session, err := database.New(provider, dbConnectionStr)
 	glog.Info(dbConnectionStr)
@@ -83,9 +83,24 @@ func main() {
 		glog.Error("Authorization engine not started")
 	}
 
-	// Connect to the Nats Server
+	func() {
+		retries := 0
+	try:
+		retries++
+		nc, err = nats.Connect(natsConnection)
+		if err != nil {
+			if retries < connectionRetries {
+				time.Sleep(5000)
+				glog.Info("Trying to connect ---", retries)
+				goto try
+			}
+			glog.Fatal("Not connected to Nats.. hence the application cannot be started.")
+		}
+		glog.Info(natsConnection)
+	}()
 
-	nc, err := nats.Connect(natsConnection)
+	// Connect to the Nats Server
+	/*nc, err := nats.Connect(natsConnection)
 	if err != nil {
 		glog.Error("Has it connected?", err)
 	}
@@ -93,7 +108,7 @@ func main() {
 		defer nc.Close()
 	}
 	glog.Info(natsConnection)
-
+	*/
 	// Force log's color
 	gin.ForceConsoleColor()
 
@@ -104,10 +119,10 @@ func main() {
 	//router.Use(cors.Default())
 	router.Use(CORSMiddleware())
 	// create user handler instance
-	//handler.Init(nc)
-	//channels.InitAudit(session, dbName)
+	handler.Init(nc)
+	channels.InitAudit(session, dbName)
 
-	//router.Use(AuditMiddleware())
+	router.Use(AuditMiddleware())
 
 	//Authorization Middleware
 	router.Use(Authorization(e))
@@ -182,6 +197,7 @@ func Authorization(e *casbin.Enforcer) func(*gin.Context) {
 	}
 }
 
+// AuditMiddleware to audit and find details of hits
 func AuditMiddleware() func(*gin.Context) {
 	return func(c *gin.Context) {
 		if c.Request.Method == "POST" || c.Request.Method == "GET" || c.Request.Method == "PUT" || c.Request.Method == "DELETE" || c.Request.Method == "PATCH" {
@@ -191,11 +207,19 @@ func AuditMiddleware() func(*gin.Context) {
 			}
 			c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 
-			var data interface{}
+			//var data interface{}
 
-			json.Unmarshal(bodyBytes, &data)
+			//json.Unmarshal(bodyBytes, &bodyBytes)
+			var headers string
+			for key, val := range c.Request.Header {
+				// Convert each key/value pair in m to a string
+				headers = fmt.Sprintf("%s=\"%s\"", key, val)
+				// Do whatever you want to do with the string;
+				// in this example I just print out each of them.
+				//fmt.Println(s)
+			}
 			ip, _ := helper.GetClientIPHelper(c.Request)
-			channels.ChanAudit <- channels.Audit{Data: data, Headers: c.Request.Header, URLPath: c.Request.Host + helper.GetPath(c), IP: ip, Device: c.Request.Header.Get("User-Agent"), DateTime: time.Now().UTC()}
+			channels.ChanAudit <- models.Audit{Data: string(bodyBytes), Headers: headers, URLPath: c.Request.Host + helper.GetPath(c), IP: ip, Device: c.Request.Header.Get("User-Agent"), DateTime: time.Now().UTC()}
 		}
 		c.Next()
 	}
