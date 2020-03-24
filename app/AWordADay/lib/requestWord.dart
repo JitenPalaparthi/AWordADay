@@ -28,10 +28,11 @@ class RequestWordState extends State<RequestWord> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: mainKey,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("Request for a word")),
       body: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Form(
+          child:SingleChildScrollView(child:Form(
             key: formKey,
             child: Column(
               children: <Widget>[
@@ -56,7 +57,7 @@ class RequestWordState extends State<RequestWord> {
                 ),
               ],
             ),
-          )),
+          ))),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
