@@ -163,8 +163,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
                 fontSize: 35)),
       ),
-      body: Center(
-        child: Column(
+      body: 
+        SingleChildScrollView(child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: generateWordFrame(_word),
