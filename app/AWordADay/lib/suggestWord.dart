@@ -32,7 +32,7 @@ class SuggestAWordState extends State<SuggestAWord> {
       appBar: AppBar(title: Text("Suggest A New Word")),
       body: Padding(
           padding: EdgeInsets.all(10.0),
-          child:Form(
+          child:SingleChildScrollView(child:Form(
             key: formKey,
             child: Column(
               children: <Widget>[
@@ -108,7 +108,7 @@ class SuggestAWordState extends State<SuggestAWord> {
                 ),
               ],
             ),
-          )),
+          ))),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.save),
