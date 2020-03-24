@@ -261,14 +261,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   builder: (BuildContext context) => Contact()));
             },
           ),
-          ListTile(
+          /*ListTile(
             title: Text('Share'),
             onTap: () {
               Navigator.pop(context);
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (BuildContext context) => RequestWord()));
             },
-          ),
+          ),*/
         ],
       ),
     );
