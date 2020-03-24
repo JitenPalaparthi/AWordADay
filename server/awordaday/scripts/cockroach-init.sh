@@ -30,5 +30,15 @@ CREATE TABLE IF NOT EXISTS  sentences
     status STRING NOT NULL DEFAULT 'Created',
     last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     requested_by STRING NOT NULL
-); 
-" --insecure -u root
+);" --insecure -u root
+
+/cockroach/cockroach.sh sql -e "CREATE TABLE IF NOT EXISTS  audits
+(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    data STRING NOT NULL,
+    ip STRING NOT NULL,
+    device STRING NOT NULL,
+    url_path STRING NOT NULL ,
+    headers STRING NOT NULL ,
+    date_time STRING NOT NULL
+);" --insecure -u root
