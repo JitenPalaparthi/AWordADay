@@ -116,12 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
         if (value == true) {
           mainKey.currentState.showSnackBar(new SnackBar(
               content: Text("Word successfully requested"),
-              duration: Duration(milliseconds: 1000)));
+              duration: Duration(milliseconds: 5000)));
         } else {
           mainKey.currentState.showSnackBar(new SnackBar(
               content: Text(
                   "Word  could not be requested.Probably already existed."),
-              duration: Duration(milliseconds: 1000)));
+              duration: Duration(milliseconds: 5000)));
         }
         // Run the code here using the value
       });
