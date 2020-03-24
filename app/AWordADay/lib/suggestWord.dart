@@ -28,10 +28,11 @@ class SuggestAWordState extends State<SuggestAWord> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: mainKey,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("Suggest A New Word")),
       body: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Form(
+          child:Form(
             key: formKey,
             child: Column(
               children: <Widget>[
