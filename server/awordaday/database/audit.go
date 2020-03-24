@@ -8,7 +8,6 @@ import (
 // InsertAudit to insert a new sentence
 func (d *Database) InsertAudit(audit *models.Audit) (err error) {
 	c := d.Client.Create(audit)
-
 	if c.Error != nil {
 		return c.Error
 	}

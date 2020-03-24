@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS  sentences
 /cockroach/cockroach.sh sql -e "Create Table IF NOT EXISTS request_words
 (   
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    word STRING unique NOT NULL,
+    word STRING NOT NULL,
     status STRING NOT NULL DEFAULT 'Created',
     last_updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     requested_by STRING NOT NULL

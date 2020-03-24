@@ -99,16 +99,6 @@ func main() {
 		glog.Info(natsConnection)
 	}()
 
-	// Connect to the Nats Server
-	/*nc, err := nats.Connect(natsConnection)
-	if err != nil {
-		glog.Error("Has it connected?", err)
-	}
-	if nc != nil {
-		defer nc.Close()
-	}
-	glog.Info(natsConnection)
-	*/
 	// Force log's color
 	gin.ForceConsoleColor()
 

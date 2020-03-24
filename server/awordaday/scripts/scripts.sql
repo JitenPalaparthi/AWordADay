@@ -42,10 +42,10 @@ Create Table IF NOT EXISTS request_words
 CREATE TABLE IF NOT EXISTS  audits
 (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    data STRING unique NOT NULL,
+    data STRING NOT NULL,
     ip STRING NOT NULL,
     device STRING NOT NULL,
-    urlPath STRING NOT NULL ,
+    url_path STRING NOT NULL ,
     headers STRING NOT NULL ,
-    dateTime STRING NOT NULL
+    date_time STRING NOT NULL
 );

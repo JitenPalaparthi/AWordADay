@@ -3,6 +3,8 @@ package handler
 import (
 	"fmt"
 
+	"github.com/golang/glog"
+
 	nats "github.com/nats-io/nats.go"
 )
 
@@ -21,6 +23,7 @@ var (
 func Init(nc *nats.Conn) {
 	if chanMessage == nil {
 		chanMessage = make(chan Message, 20)
+		glog.Info("----------------> Handler Init")
 		go ProcessMessage(nc)
 	}
 }

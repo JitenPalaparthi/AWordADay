@@ -8,4 +8,5 @@ require (
 	github.com/jinzhu/gorm v1.9.12 // indirect
 	github.com/nats-io/nats-server/v2 v2.1.4 // indirect
 	github.com/spf13/viper v1.6.2 // indirect
+	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22 // indirect
 )

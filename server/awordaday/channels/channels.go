@@ -15,15 +15,6 @@ type Message struct {
 	Subject string
 }
 
-/*type Audit struct {
-	Data     interface{}
-	IP       string
-	Device   string
-	URLPath  string
-	Headers  map[string][]string
-	DateTime time.Time
-}*/
-
 var (
 	chanMessage chan Message
 	NC          *nats.Conn

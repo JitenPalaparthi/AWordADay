@@ -9,7 +9,7 @@ type Audit struct {
 	Data     string    `gorm:"data" json:"data"`
 	IP       string    `gorm:"ip" json:"ip"`
 	Device   string    `gorm:"device" json:"device"`
-	URLPath  string    `gorm:"urlPath" json:"urlPath"`
+	URLPath  string    `gorm:"url_path" json:"urlPath"`
 	Headers  string    `gorm:"headers" json:"headers"` //map[string][]string `gorm:"sentence" json:"sentence"`
-	DateTime time.Time `gorm:"dateTime" json:"dateTime"`
+	DateTime time.Time `gorm:"date_time" json:"dateTime"`
 }
