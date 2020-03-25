@@ -1,16 +1,5 @@
 version: "3"
 services:
-  app:
-    container_name: awordaday
-    restart: always
-    build: ./
-    ports:
-      - "50051:50051"
-    links:
-      - node_1
-    networks: 
-      - cockroachdb_net 
-
   node_1:
     container_name: node_1
     image: cockroachdb/cockroach:latest
@@ -37,6 +26,18 @@ services:
       - "8222:8222"
     networks:
       - cockroachdb_net
+  app:
+    container_name: awordaday
+    restart: always
+    build: ./
+    ports:
+      - "50051:50051"
+    links:
+      - node_1
+    depends_on:
+      - node_1
+    networks: 
+      - cockroachdb_net 
       
 networks:
     cockroachdb_net:
