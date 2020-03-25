@@ -12,7 +12,7 @@ class About extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 35)),
       ),
-      body: new Container(
+      body:SingleChildScrollView(child: new Container(
         padding: new EdgeInsets.all(32.0),
         child: new Center(
           child: new Column(
@@ -43,6 +43,6 @@ class About extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }
