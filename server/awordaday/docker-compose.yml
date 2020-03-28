@@ -2,15 +2,14 @@ version: "3"
 services:
   node_1:
     container_name: node_1
-    image: cockroachdb/cockroach:latest
+    image: jpalaparthi/cockroachdb_awordaday:test
     restart: "unless-stopped"
     environment: 
       COCKROACH_USER: root
       COCKROACH_DB: a_word_a_day
     volumes:
       - ./data/node_1:/cockroach/cockroach-data
-      - ./scripts/cockroach-init.sh:/cockroach/cockroach-init.sh
-    entrypoint: "/bin/bash /cockroach/cockroach-init.sh"
+    command: start --insecure
     ports:
       - "26257:26257"
       - "8080:8080"

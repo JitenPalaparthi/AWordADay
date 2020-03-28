@@ -24,12 +24,6 @@ class About extends StatelessWidget {
                     children: <Widget>[
                       new RichText(
                           text: TextSpan(
-                              text: 'About the App',
-                              style: TextStyle(color: Colors.black,
-                                  fontWeight: FontWeight.bold, fontSize: 18))),
-                      new SizedBox(height: 20),
-                      new RichText(
-                          text: TextSpan(
                               text: '"A Word A Day" is a very simple yet useful application.' +
                                   'Our main intention is to improve your vocabulary but not in hurry.' +
                                   'Just learn a single word each day and gradually improve your English vocabulary.' +
