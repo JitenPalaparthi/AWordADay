@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:Admin/api/word.dart' as api_word;
 
 class SuggestAWord extends StatefulWidget {
-  final String userType, userCategory;
+ 
 
   // In the constructor, require a Todo.
   SuggestAWord({
     Key key,
-    this.userCategory,
-    this.userType,
   }) : super(key: key);
 
   @override

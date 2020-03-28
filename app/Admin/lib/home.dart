@@ -1,5 +1,3 @@
-import 'package:Admin/wordsGridView.dart';
-
 import 'package:flutter/material.dart';
 import 'package:Admin/models/word.dart';
 import 'package:Admin/api/word.dart' as api_word;
