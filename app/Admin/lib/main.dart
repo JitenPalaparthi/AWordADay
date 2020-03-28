@@ -1,3 +1,7 @@
+//import 'package:Admin/models/requestWord.dart';
+import 'package:Admin/suggestWord.dart';
+import 'package:Admin/requestWord.dart';
+
 import 'package:flutter/material.dart';
 import 'package:Admin/home.dart';
 
@@ -6,6 +10,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+    final mainKey = GlobalKey<ScaffoldState>();
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,7 +37,7 @@ class MyApp extends StatelessWidget {
         //fontFamily: 'learning_curve',
       ),
       home: MyHomePage(title: 'A Word A Day(Admin)'),
-    );
+      );
   }
 }
 

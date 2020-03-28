@@ -1,2 +1,2 @@
 #!/bin/bash
-/cockroach/cockroach.sh start --insecure
+/cockroach/cockroach.sh start-single-node --insecure

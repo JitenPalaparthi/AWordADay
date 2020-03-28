@@ -4,13 +4,11 @@ import 'package:Admin/api/word.dart' as api_word;
 
 
 class RequestWord extends StatefulWidget {
-  final String userType, userCategory;
+  
 
   // In the constructor, require a Todo.
   RequestWord({
     Key key,
-    this.userCategory,
-    this.userType,
   }) : super(key: key);
 
   @override

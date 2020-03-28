@@ -1,13 +1,9 @@
 import 'dart:convert';
-import 'package:AWordADay/requestWord.dart';
-import 'package:AWordADay/suggestWord.dart';
-import 'package:AWordADay/about.dart';
-import 'package:AWordADay/contact.dart';
-
 import 'package:flutter/material.dart';
 import 'package:AWordADay/models/word.dart';
 import 'package:AWordADay/api/word.dart' as api_word;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share/share.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -97,62 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     this.getInit();
-  }
-
-  _onTap(int index) {
-    if (index == 0) {
-      getInit();
-    }
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RequestWord(),
-        ),
-      ).then((value) {
-        if (value == null) {
-          return;
-        }
-        if (value == true) {
-          mainKey.currentState.showSnackBar(new SnackBar(
-              content: Text("Word successfully requested"),
-              duration: Duration(milliseconds: 5000)));
-        } else {
-          mainKey.currentState.showSnackBar(new SnackBar(
-              content: Text(
-                  "Word  could not be requested.Probably already existed."),
-              duration: Duration(milliseconds: 5000)));
-        }
-        // Run the code here using the value
-      });
-    }
-  }
-
-  _onAdd() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SuggestAWord(),
-      ),
-    ).then((value) {
-      if (value == null) {
-        return;
-      }
-      if (value == true) {
-        mainKey.currentState.showSnackBar(new SnackBar(
-            content: Text("Word successfully suggested"),
-            duration: Duration(milliseconds: 5000)));
-      } else {
-        mainKey.currentState.showSnackBar(new SnackBar(
-            content:
-                Text("Word  could not be suggested.Probably already existed."),
-            duration: Duration(milliseconds: 5000)));
-      }
-      // Run the code here using the value
-    });
-  }
-
-  @override
+  } 
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: mainKey,
@@ -170,26 +112,19 @@ class _MyHomePageState extends State<MyHomePage> {
           children: generateWordFrame(_word),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // this will be set when a new tab is tapped
-        items: [
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.explore), title: Text('Request'))
-        ],
-        onTap: _onTap,
-      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton(
-        onPressed: _onAdd,
-        tooltip: 'Add a new Word ',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.share),
+        onPressed: (){
+           final RenderBox box = context.findRenderObject();
+                              Share.share("Hello Muruga",
+                                  subject: "Muruga Share",
+                                  sharePositionOrigin:
+                                      box.localToGlobal(Offset.zero) &
+                                          box.size);
+        },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      drawer: _drawer(
-          context), // This trailing comma makes auto-formatting nicer for build methods.
+      //ing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -214,67 +149,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return list;
   }
 
-  Widget _drawer(BuildContext context) {
-    return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the drawer if there isn't enough vertical
-      // space to fit everything.
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              verticalDirection: VerticalDirection.down,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                    child: Center(
-                        child: Text(widget.title,
-                            style: TextStyle(
-                                fontFamily: 'learning_curve',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 35)))),
-                SizedBox(height: 5),
-                Text('Hello User'),
-                SizedBox(height: 5),
-              ],
-            ), //Text('Hello $name'),
-            decoration: BoxDecoration(
-              color: Colors.blueGrey[300],
-            ),
-          ),
-          ListTile(
-            title: Text('About'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => About()));
-            },
-          ),
-          ListTile(
-            title: Text('Contact'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => Contact()));
-            },
-          ),
-          /*ListTile(
-            title: Text('Share'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => RequestWord()));
-            },
-          ),*/
-        ],
-      ),
-    );
-  }
-}
-
 Widget getContainer(String text, double size, FontWeight weight) {
   return Container(
     child: new Text(
@@ -290,4 +164,5 @@ Widget getContainer(String text, double size, FontWeight weight) {
   );
 }
 
+}
 // Only once fetch the record

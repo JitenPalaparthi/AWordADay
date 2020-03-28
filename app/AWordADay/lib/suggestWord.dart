@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:AWordADay/api/word.dart' as api_word;
 
 class SuggestAWord extends StatefulWidget {
-  final String userType, userCategory;
-
+  final String title;
+  final Function(int index, String message) notifyParent;
   // In the constructor, require a Todo.
-  SuggestAWord({
-    Key key,
-    this.userCategory,
-    this.userType,
-  }) : super(key: key);
+  SuggestAWord({Key key, this.title, @required this.notifyParent})
+      : super(key: key);
 
   @override
   SuggestAWordState createState() => SuggestAWordState();
@@ -25,14 +22,27 @@ class SuggestAWordState extends State<SuggestAWord> {
   final mainKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: mainKey,
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text("Suggest A New Word")),
+      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomPadding: true,
+      appBar: AppBar(
+        title: Text(widget.title,
+            style: TextStyle(
+                fontFamily: 'learning_curve',
+                fontWeight: FontWeight.bold,
+                fontSize: 35)),
+      ),
       body: Padding(
-          padding: EdgeInsets.all(10.0),
-          child:SingleChildScrollView(child:Form(
+          padding: EdgeInsets.all(5.0),
+          child: SingleChildScrollView(
+              child: Form(
             key: formKey,
             child: Column(
               children: <Widget>[
@@ -137,13 +147,14 @@ class SuggestAWordState extends State<SuggestAWord> {
         updatedBy: _email,
         sentences: _sentences,
       );
-      var result = await api_word.Word()
-              .addWord("", objword) ??
-          null;
+      var result = await api_word.Word().addWord("", objword) ?? null;
       if (result.status == "success") {
-        Navigator.pop(context, true);
+        form.reset();
+        widget.notifyParent(0, "Word successfully Suggested");
       } else {
-        Navigator.pop(context, false);
+        form.reset();
+        widget.notifyParent(
+            0, "Word  could not be suggested.Probably already existed.");
       }
     }
   }
