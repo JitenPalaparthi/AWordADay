@@ -1,0 +1,4 @@
+server/*
+AWordADay-workspace.code-workspace
+go.mod
+go.sum
