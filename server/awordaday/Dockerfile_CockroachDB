@@ -1,3 +1,0 @@
-FROM cockroachdb/cockroach:v19.2.5
-
-ENV 

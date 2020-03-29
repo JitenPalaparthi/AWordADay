@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS a_word_a_day;
+USE a_word_a_day;
+
 CREATE TABLE IF NOT EXISTS  words
 (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -19,17 +22,8 @@ CREATE TABLE IF NOT EXISTS  sentences
     updated_by STRING NOT NULL
 );
 
--- Additional Status 
-Create Table IF NOT EXISTS todaysWord
-(
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    word_id UUID NOT NULL REFERENCES words (id),
-    today DATE NOT NULL,
-    status STRING NOT NULL DEFAULT 'NOT-ACTIVE',
-);
 
 
--- Additional Status 
 Create Table IF NOT EXISTS request_words
 (   
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

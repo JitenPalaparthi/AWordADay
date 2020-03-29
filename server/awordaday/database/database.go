@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	CONNECTION_RETRIES = 5
+	CONNECTION_RETRIES = 5000
 )
 
 type Database struct {

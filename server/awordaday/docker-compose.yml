@@ -1,20 +1,38 @@
-version: "3"
+version: '3'
+
 services:
-  node_1:
-    container_name: node_1
-    image: jpalaparthi/cockroachdb_awordaday:test
-    restart: "unless-stopped"
-    environment: 
-      COCKROACH_USER: root
-      COCKROACH_DB: a_word_a_day
-    volumes:
-      - ./data/node_1:/cockroach/cockroach-data
-    command: start --insecure
+  awordaday1:
+    container_name: awordaday1
+    image: cockroachdb/cockroach:v19.2.5
+    command: start --insecure  --join=awordaday1,awordaday2,awordaday3
     ports:
       - "26257:26257"
       - "8080:8080"
     networks:
-      - cockroachdb_net
+     - awordadaynet
+    volumes:
+     - "./data/awordaday1:/cockroach/data"
+     - "./scripts:/cockroach/scripts"
+
+  
+  awordaday2:
+    container_name: awordaday2
+    image: cockroachdb/cockroach:v19.2.5
+    command: start --insecure  --join=awordaday1,awordaday2,awordaday3
+    networks:
+     - awordadaynet
+    volumes:
+     - "./data/awordaday2:/cockroach/data" 
+
+  awordaday3:
+    container_name: awordaday3
+    image: cockroachdb/cockroach:v19.2.5
+    command: start --insecure  --join=awordaday1,awordaday2,awordaday3
+   
+    networks:
+     - awordadaynet
+    volumes:
+     - "./data/awordaday3:/cockroach/data" 
 
   nats:
     container_name: aWordADay_nats
@@ -24,20 +42,7 @@ services:
       - "6222:6222"
       - "8222:8222"
     networks:
-      - cockroachdb_net
-  app:
-    container_name: awordaday
-    restart: always
-    build: ./
-    ports:
-      - "50051:50051"
-    links:
-      - node_1
-    depends_on:
-      - node_1
-    networks: 
-      - cockroachdb_net 
-      
+     - awordadaynet
+
 networks:
-    cockroachdb_net:
-        driver: bridge
+  awordadaynet:

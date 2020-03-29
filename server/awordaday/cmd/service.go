@@ -70,7 +70,7 @@ func main() {
 		if session != nil {
 			session.Client.Close()
 		}
-		glog.Fatal("no connection to the database", err.Error())
+		glog.Info("no connection to the database", err.Error())
 	}
 	if session != nil {
 		defer session.Client.Close()
@@ -94,7 +94,7 @@ func main() {
 				glog.Info("Trying to connect ---", retries)
 				goto try
 			}
-			glog.Fatal("Not connected to Nats.. hence the application cannot be started.")
+			glog.Info("Not connected to Nats.. hence the application cannot be started.")
 		}
 		glog.Info(natsConnection)
 	}()

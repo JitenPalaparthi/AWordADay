@@ -1,9 +1,9 @@
 # A sample TOML config file.
 [connections]
 Provider="postgres"
-DBConnection="postgresql://root@localhost:26257/a_word_a_day?sslmode=disable"
+DBConnection="postgresql://root@awordaday1:26257/a_word_a_day?sslmode=disable"
 DBName="a_word_a_day"
-NATSURL="nats://localhost:4222"
+NATSURL="nats://aWordADay_nats:4222"
 
 [casbin]
 DBName="casbin"
