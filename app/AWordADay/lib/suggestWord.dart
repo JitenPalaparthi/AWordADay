@@ -30,7 +30,7 @@ class SuggestAWordState extends State<SuggestAWord> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: mainKey,
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: Text(widget.title,
@@ -84,9 +84,9 @@ class SuggestAWordState extends State<SuggestAWord> {
                 ),
                 TextFormField(
                   autocorrect: false,
-                  keyboardType: TextInputType.multiline,
-                  textInputAction: TextInputAction.newline,
-                  maxLines: 2,
+                  keyboardType: TextInputType.text,
+                  minLines: 2,
+                  maxLines: 4,
                   decoration: InputDecoration(
                     labelText: "1.Sentence:",
                   ),
@@ -96,8 +96,8 @@ class SuggestAWordState extends State<SuggestAWord> {
                 ),
                 TextFormField(
                   autocorrect: false,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 2,
+                  keyboardType: TextInputType.text,
+                  maxLines: 4,
                   decoration: InputDecoration(
                     labelText: "2.Sentence:",
                   ),
@@ -107,8 +107,8 @@ class SuggestAWordState extends State<SuggestAWord> {
                 ),
                 TextFormField(
                   autocorrect: false,
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 2,
+                  keyboardType: TextInputType.text,
+                  maxLines: 4,
                   decoration: InputDecoration(
                     labelText: "3.Sentence:",
                   ),

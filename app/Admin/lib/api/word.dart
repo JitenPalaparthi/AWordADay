@@ -9,7 +9,7 @@ import '../models/response.dart';
 
 class Word {
   final String baseURL =
-     "http://localhost:50051/v1/";
+     "http://51.79.144.85:50051/v1/";
   
   final String magicWordURL=
       "word/getMagicWord";

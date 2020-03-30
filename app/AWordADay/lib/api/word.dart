@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import '../models/response.dart';
 
 class Word {
-  final String baseURL = "http://localhost:50051/v1/";
+  final String baseURL = "http://51.79.144.85:50051/v1/";
 
   final String magicWordURL = "word/getMagicWord";
 

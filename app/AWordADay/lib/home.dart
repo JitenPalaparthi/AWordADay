@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.share),
         onPressed: (){
            final RenderBox box = context.findRenderObject();
-                              Share.share("Hello Muruga",
+                             Share.share("Hello Muruga",
                                   subject: "Muruga Share",
                                   sharePositionOrigin:
                                       box.localToGlobal(Offset.zero) &
